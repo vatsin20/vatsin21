@@ -1,0 +1,25 @@
+import pandas as pd
+import numpy as np
+from sklearn.linear_model import LinearRegression
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import mean_squared_error
+
+# Load the housing price dataset
+housing_data = pd.read_csv("housing.csv")
+
+# Split the data into training and testing sets
+X_train, X_test, y_train, y_test = train_test_split(housing_data, housing_data["price"], test_size=0.2)
+
+# Create a linear regression model
+lr = LinearRegression()
+
+# Fit the model to the training data
+lr.fit(X_train, y_train)
+
+# Predict the house prices for the test set
+y_pred = lr.predict(X_test)
+
+# Calculate the mean squared error
+mse = mean_squared_error(y_test, y_pred)
+
+print("Mean squared error:", mse)
